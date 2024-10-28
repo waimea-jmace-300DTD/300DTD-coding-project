@@ -1,6 +1,6 @@
-# PROJECT NAME HERE
+# Escaping Toms basement  
 
-### Level 3 Programming Project by YOUR NAME HERE
+### Level 3 Programming Project by Jayden Mace
 
 This project is assessed against [AS91906](https://www.nzqa.govt.nz/nqfdocs/ncea-resource/achievements/2019/as91906.pdf)
 
@@ -8,8 +8,11 @@ This project is assessed against [AS91906](https://www.nzqa.govt.nz/nqfdocs/ncea
 
 The project involves the programming of a game.
 
-BRIEF PROJECT DESCRIPTION HERE
-BRIEF PROJECT DESCRIPTION HERE
+you are lost in Toms basement you need to get out before he finds you and dose unthinkable things 
+
+you will start in a room with one door when you leave its like an escape 
+room were you need to find keys and get out before the time runs out  
+
 BRIEF PROJECT DESCRIPTION HERE
 BRIEF PROJECT DESCRIPTION HERE
 
