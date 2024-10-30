@@ -66,6 +66,7 @@ class GUI : JFrame(), ActionListener {
     private lateinit var roomBack: JButton
     private lateinit var roomNext: JButton
     private lateinit var lockbox: JButton
+    private lateinit var confirm: JButton
 
 
     private lateinit var doorimageIcon: ImageIcon
@@ -155,10 +156,10 @@ class GUI : JFrame(), ActionListener {
 
 
         currentRoomLabel = JLabel("room: start", SwingConstants.CENTER)
-
         currentRoomLabel.bounds = Rectangle(100, 80, 400, 30)
         currentRoomLabel.font = baseFont
         add(currentRoomLabel)
+
 
         descriptionLabel = JLabel("room", SwingConstants.CENTER)
         descriptionLabel.bounds = Rectangle(100, 10, 900, 50)
@@ -182,7 +183,6 @@ class GUI : JFrame(), ActionListener {
         add(roomNext)
 
 
-
         lockbox = JButton("$password lockbox")
         lockbox.bounds = Rectangle(50, 500, 300, 400)
         lockbox.font = baseFont
@@ -190,11 +190,20 @@ class GUI : JFrame(), ActionListener {
         lockbox.isVisible = false
         add(lockbox)
 
-        passwordTextField = JTextField("New pet Name Here!", SwingConstants.CENTER)
-        passwordTextField.bounds = Rectangle(250, 500, 240, 40)
+
+        passwordTextField = JTextField("password", SwingConstants.CENTER)
+        passwordTextField.bounds = Rectangle(900, 800, 240, 40)
         passwordTextField.font = baseFont
         passwordTextField.isVisible = false
         add(passwordTextField)
+
+
+        confirm = JButton("?")
+        confirm.bounds = Rectangle(1200, 800, 40, 40)
+        confirm.font = baseFont
+        confirm.isVisible = false
+        confirm.addActionListener(this)
+        add(confirm)
 
 
 
@@ -220,6 +229,7 @@ class GUI : JFrame(), ActionListener {
             roomBack -> gotoPrevRoom()
             roomNext -> gotoNextRoom()
             lockbox -> showLock()
+            confirm -> confirmPassword()
         }
     }
 
@@ -240,9 +250,14 @@ class GUI : JFrame(), ActionListener {
 
     private fun showLock() {
         passwordTextField.isVisible = true
-        val givenPassword = passwordTextField.text
-        if(givenPassword == password){
-            rooms[3].locked = false
+        confirm.isVisible = true
+    }
+
+
+    private fun confirmPassword() {
+
+        if(passwordTextField.text == password){
+            rooms[2].locked = false
         }
     }
 
