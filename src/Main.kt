@@ -52,13 +52,11 @@ class GUI : JFrame(), ActionListener {
     val rooms = mutableListOf<Room>()
     var currentRoom: Room? = null
     val password = (100..999).random().toString()
+    val password2 = (100..999).random().toString()
+
 
 
     // Setup some properties to hold the UI elements
-    private lateinit var playLabel: JLabel
-    private lateinit var childLabel: JLabel
-    private lateinit var parentLabel: JLabel
-    private lateinit var playButton: JButton
 
     private lateinit var passwordTextField: JTextField
     private lateinit var currentRoomLabel: JLabel
@@ -85,7 +83,7 @@ class GUI : JFrame(), ActionListener {
 
         currentRoom = rooms.first()
         currentRoom!!.locked = false
-
+        descriptionLabel.isVisible = true
         showRoom()
     }
 
@@ -164,12 +162,13 @@ class GUI : JFrame(), ActionListener {
         descriptionLabel = JLabel("room", SwingConstants.CENTER)
         descriptionLabel.bounds = Rectangle(100, 10, 900, 50)
         descriptionLabel.font = baseFont
+        descriptionLabel.isVisible = false
         add(descriptionLabel)
 
 
         roomBack = JButton()
         roomBack.icon = doorimageIcon
-        roomBack.bounds = Rectangle(520, 60, 300, 400)
+        roomBack.bounds = Rectangle(520, 60, 120, 190)
         roomBack.font = baseFont
         roomBack.addActionListener(this)
         add(roomBack)
@@ -177,7 +176,7 @@ class GUI : JFrame(), ActionListener {
 
         roomNext = JButton()
         roomNext.icon = doorimageIcon
-        roomNext.bounds = Rectangle(520, 500, 300, 400)
+        roomNext.bounds = Rectangle(520, 500, 120, 190)
         roomNext.font = baseFont
         roomNext.addActionListener(this)
         add(roomNext)
@@ -204,6 +203,8 @@ class GUI : JFrame(), ActionListener {
         confirm.isVisible = false
         confirm.addActionListener(this)
         add(confirm)
+
+
 
 
 
@@ -237,6 +238,7 @@ class GUI : JFrame(), ActionListener {
     private fun gotoPrevRoom() {
         if (currentRoom?.previous != null) {
             currentRoom = currentRoom?.previous
+            descriptionLabel.isVisible = true
             showRoom()
         }
     }
@@ -244,6 +246,7 @@ class GUI : JFrame(), ActionListener {
     private fun gotoNextRoom() {
         if (currentRoom?.next != null) {
             currentRoom = currentRoom?.next
+            descriptionLabel.isVisible = false
             showRoom()
         }
     }
@@ -257,7 +260,13 @@ class GUI : JFrame(), ActionListener {
     private fun confirmPassword() {
 
         if(passwordTextField.text == password){
-            rooms[2].locked = false
+            rooms[1].locked = false
+            descriptionLabel.isVisible = true
+            updateButtonStates()
+
+        }
+        else{
+            passwordTextField.text = "incorrect"
         }
     }
 
@@ -272,6 +281,8 @@ class GUI : JFrame(), ActionListener {
         }
         else{
             lockbox.isVisible = false
+            confirm.isVisible = false
+            passwordTextField.isVisible = false
         }
     }
 }
