@@ -63,8 +63,21 @@ class GUI : JFrame(), ActionListener {
     private lateinit var descriptionLabel: JLabel
     private lateinit var roomBack: JButton
     private lateinit var roomNext: JButton
-    private lateinit var lockbox: JButton
+    private lateinit var lockBox: JButton
     private lateinit var confirm: JButton
+    private lateinit var number1: JButton
+    private lateinit var number2: JButton
+    private lateinit var number3: JButton
+    private lateinit var number4: JButton
+    private lateinit var number5: JButton
+    private lateinit var number6: JButton
+    private lateinit var number7: JButton
+    private lateinit var number8: JButton
+    private lateinit var number9: JButton
+    private lateinit var number0: JButton
+    private lateinit var keyPad: JButton
+
+
 
 
     private lateinit var doorimageIcon: ImageIcon
@@ -89,7 +102,7 @@ class GUI : JFrame(), ActionListener {
 
     fun setupRoom() {
         val startRoom = Room("The Starting Room", "you wake up in a room theres a note witch says Remember: $password")
-        val room2 = Room("Room 2", "not done")
+        val room2 = Room("Room 2", "in the lock-box theres a key and a note witch says 3 6 5")
         val room3 = Room("Room 3", "not done")
         val room4 = Room("Room 4", "not done")
         val room5 = Room("Room 5", "not done")
@@ -182,12 +195,12 @@ class GUI : JFrame(), ActionListener {
         add(roomNext)
 
 
-        lockbox = JButton("$password lockbox")
-        lockbox.bounds = Rectangle(50, 500, 300, 400)
-        lockbox.font = baseFont
-        lockbox.addActionListener(this)
-        lockbox.isVisible = false
-        add(lockbox)
+        lockBox = JButton("$password lockbox")
+        lockBox.bounds = Rectangle(50, 500, 300, 400)
+        lockBox.font = baseFont
+        lockBox.addActionListener(this)
+        lockBox.isVisible = false
+        add(lockBox)
 
 
         passwordTextField = JTextField("password", SwingConstants.CENTER)
@@ -203,6 +216,93 @@ class GUI : JFrame(), ActionListener {
         confirm.isVisible = false
         confirm.addActionListener(this)
         add(confirm)
+
+
+
+
+
+        number1 = JButton("1")
+        number1.bounds = Rectangle(1000 , 400, 40, 40)
+        number1.font = baseFont
+        number1.isVisible = false
+        number1.addActionListener(this)
+        add(number1)
+
+        number2 = JButton("2")
+        number2.bounds = Rectangle(1100, 400, 40, 40)
+        number2.font = baseFont
+        number2.isVisible = false
+        number2.addActionListener(this)
+        add(number2)
+
+        number3 = JButton("3")
+        number3.bounds = Rectangle(1200, 400, 40, 40)
+        number3.font = baseFont
+        number3.isVisible = false
+        number3.addActionListener(this)
+        add(number3)
+
+        number4 = JButton("4")
+        number4.bounds = Rectangle(1000, 500, 40, 40)
+        number4.font = baseFont
+        number4.isVisible = false
+        number4.addActionListener(this)
+        add(number4)
+
+        number5 = JButton("5")
+        number5.bounds = Rectangle(1100, 500, 40, 40)
+        number5.font = baseFont
+        number5.isVisible = false
+        number5.addActionListener(this)
+        add(number5)
+
+        number6 = JButton("6")
+        number6.bounds = Rectangle(1200, 500, 40, 40)
+        number6.font = baseFont
+        number6.isVisible = false
+        number6.addActionListener(this)
+        add(number6)
+
+        number7 = JButton("7")
+        number7.bounds = Rectangle(1000, 600, 40, 40)
+        number7.font = baseFont
+        number7.isVisible = false
+        number7.addActionListener(this)
+        add(number7)
+
+        number8 = JButton("8")
+        number8.bounds = Rectangle(1100, 600, 40, 40)
+        number8.font = baseFont
+        number8.isVisible = false
+        number8.addActionListener(this)
+        add(number8)
+
+        number9 = JButton("9")
+        number9.bounds = Rectangle(1200, 600, 40, 40)
+        number9.font = baseFont
+        number9.isVisible = false
+        number9.addActionListener(this)
+        add(number9)
+
+        number0 = JButton("0")
+        number0.bounds = Rectangle(1100, 700, 40, 40)
+        number0.font = baseFont
+        number0.isVisible = false
+        number0.addActionListener(this)
+        add(number0)
+
+
+
+
+        keyPad = JButton("░")
+        keyPad.bounds = Rectangle(50, 200, 50, 60)
+        keyPad.font = baseFont
+        keyPad.addActionListener(this)
+        keyPad.isVisible = false
+        add(keyPad)
+
+
+
 
 
 
@@ -229,8 +329,10 @@ class GUI : JFrame(), ActionListener {
         when (e?.source) {
             roomBack -> gotoPrevRoom()
             roomNext -> gotoNextRoom()
-            lockbox -> showLock()
-            confirm -> confirmPassword()
+            lockBox  -> showLock()
+            confirm  -> confirmPassword()
+            keyPad   -> showKeys()
+            number0  -> 
         }
     }
 
@@ -270,19 +372,51 @@ class GUI : JFrame(), ActionListener {
         }
     }
 
+    private fun showKeys(){
+        number1.isVisible = true
+        number2.isVisible = true
+        number3.isVisible = true
+        number4.isVisible = true
+        number5.isVisible = true
+        number6.isVisible = true
+        number7.isVisible = true
+        number8.isVisible = true
+        number9.isVisible = true
+        number0.isVisible = true
+
+    }
+
 
     private fun updateButtonStates() {
         roomBack.isEnabled = currentRoom?.previous != null
         roomNext.isEnabled = currentRoom?.next != null && currentRoom?.locked == false
 
         if (currentRoom == rooms[1]) {
-            lockbox.isVisible = true
+            lockBox.isVisible = true
 
         }
         else{
-            lockbox.isVisible = false
+            lockBox.isVisible = false
             confirm.isVisible = false
             passwordTextField.isVisible = false
+
+        }
+        if (currentRoom == rooms[2]) {
+            keyPad.isVisible = true
+        }
+        else{
+            keyPad.isVisible = false
+            number1.isVisible = false
+            number2.isVisible = false
+            number3.isVisible = false
+            number4.isVisible = false
+            number5.isVisible = false
+            number6.isVisible = false
+            number7.isVisible = false
+            number8.isVisible = false
+            number9.isVisible = false
+            number0.isVisible = false
+
         }
     }
 }
