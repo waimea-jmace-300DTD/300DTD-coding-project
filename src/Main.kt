@@ -53,6 +53,11 @@ class GUI : JFrame(), ActionListener {
     var currentRoom: Room? = null
     val password = (100..999).random().toString()
     val password2 = (100..999).random().toString()
+    var clicked3 = false
+    var clicked6 = false
+    var clicked5 = false
+    var clicks = 0
+
 
 
 
@@ -76,6 +81,10 @@ class GUI : JFrame(), ActionListener {
     private lateinit var number9: JButton
     private lateinit var number0: JButton
     private lateinit var keyPad: JButton
+    private lateinit var guess1: JLabel
+    private lateinit var guess2: JLabel
+    private lateinit var guess3: JLabel
+    private lateinit var skipNext: JButton
 
 
 
@@ -302,6 +311,31 @@ class GUI : JFrame(), ActionListener {
         add(keyPad)
 
 
+        guess1 = JLabel("██", SwingConstants.CENTER)
+        guess1.bounds = Rectangle(1000, 300, 50, 50)
+        guess1.font = baseFont
+        guess1.isVisible = false
+        add(guess1)
+
+        guess2 = JLabel("██", SwingConstants.CENTER)
+        guess2.bounds = Rectangle(1100, 300, 50, 50)
+        guess2.font = baseFont
+        guess2.isVisible = false
+        add(guess2)
+
+        guess3 = JLabel("██", SwingConstants.CENTER)
+        guess3.bounds = Rectangle(1200, 300, 50, 50)
+        guess3.font = baseFont
+        guess3.isVisible = false
+        add(guess3)
+
+        skipNext = JButton("next")
+        skipNext.bounds = Rectangle(1100, 50, 80, 50)
+        skipNext.font = baseFont
+        skipNext.addActionListener(this)
+        skipNext.isVisible = true
+        add(skipNext)
+
 
 
 
@@ -327,14 +361,34 @@ class GUI : JFrame(), ActionListener {
      */
     override fun actionPerformed(e: ActionEvent?) {
         when (e?.source) {
+            skipNext -> unlockRoom()
             roomBack -> gotoPrevRoom()
             roomNext -> gotoNextRoom()
             lockBox  -> showLock()
             confirm  -> confirmPassword()
             keyPad   -> showKeys()
-            number0  -> 
+
+            number3  -> checkCode3()
+            number6  -> checkCode6()
+            number5  -> checkCode5()
+            number1  -> checkCodeWrong()
+            number2  -> checkCodeWrong()
+            number4  -> checkCodeWrong()
+            number7  -> checkCodeWrong()
+            number8  -> checkCodeWrong()
+            number9  -> checkCodeWrong()
+            number0  -> checkCodeWrong()
+
+
         }
     }
+
+
+    private fun unlockRoom() {
+        currentRoom?.locked = false
+        updateButtonStates()
+    }
+
 
 
     private fun gotoPrevRoom() {
@@ -386,6 +440,65 @@ class GUI : JFrame(), ActionListener {
 
     }
 
+    private fun checkCode3(){
+        clicked3 = true
+        clicks ++
+        checkCode()
+        updateButtonStates()
+    }
+    private fun checkCode6(){
+        clicked6 = true
+        clicks ++
+        checkCode()
+        updateButtonStates()
+    }
+    private fun checkCode5(){
+        clicked5 = true
+        clicks ++
+        checkCode()
+        updateButtonStates()
+    }
+
+
+
+    private fun checkCodeWrong(){
+        clicks ++
+        checkCode()
+        updateButtonStates()
+    }
+
+
+
+    private fun checkCode(){
+
+        if(clicks == 1){
+            guess1.isVisible = true
+        }
+        if(clicks == 2){
+            guess2.isVisible = true
+        }
+        if(clicks == 3) {
+            guess3.isVisible = true
+
+            if (clicked3 && clicked6 && clicked5) {
+                rooms[2].locked = false
+
+                updateButtonStates()
+            }
+            else{
+                clicked5 = false
+                clicked5 = false
+                clicked5 = false
+                clicks = 0
+                guess1.isVisible = false
+                guess2.isVisible = false
+                guess3.isVisible = false
+
+                updateButtonStates()
+            }
+        }
+    }
+
 
     private fun updateButtonStates() {
         roomBack.isEnabled = currentRoom?.previous != null
@@ -416,8 +529,14 @@ class GUI : JFrame(), ActionListener {
             number8.isVisible = false
             number9.isVisible = false
             number0.isVisible = false
+            guess1.isVisible =  false
+            guess2.isVisible = false
+            guess3.isVisible = false
 
         }
+
+
+
     }
 }
 
