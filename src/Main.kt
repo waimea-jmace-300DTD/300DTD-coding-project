@@ -49,14 +49,15 @@ class Room(val name: String , val description: String) {
 class GUI : JFrame(), ActionListener {
 
 
-    val rooms = mutableListOf<Room>()
-    var currentRoom: Room? = null
-    val password = (100..999).random().toString()
-    val password2 = (100..999).random().toString()
-    var clicked3 = false
-    var clicked6 = false
-    var clicked5 = false
-    var clicks = 0
+    private val rooms = mutableListOf<Room>()
+    private var currentRoom: Room? = null
+
+    private var clicked3 = false
+    private var clicked6 = false
+    private var clicked5 = false
+    private var clicks = 0
+    private var ciphers = false
+
 
 
 
@@ -85,11 +86,27 @@ class GUI : JFrame(), ActionListener {
     private lateinit var guess2: JLabel
     private lateinit var guess3: JLabel
     private lateinit var skipNext: JButton
+    private lateinit var openWordSearch: JButton
+    private lateinit var WordSearch1: JLabel
+    private lateinit var WordSearch2: JLabel
+    private lateinit var WordSearch3: JLabel
+    private lateinit var WordSearch4: JLabel
+    private lateinit var WordSearch5: JLabel
+    private lateinit var WordSearch6: JLabel
+    private lateinit var WordSearch7: JLabel
+    private lateinit var WordSearch8: JLabel
+    private lateinit var WordSearch9: JLabel
+
+    private lateinit var openCipher: JButton
+    private lateinit var normalTextLabel: JLabel
+    private lateinit var ciphertextLabel: JLabel
+
 
 
 
 
     private lateinit var doorimageIcon: ImageIcon
+    private lateinit var lockboxIcon: ImageIcon
 
     /**
      * Create, build and run the UI
@@ -110,11 +127,11 @@ class GUI : JFrame(), ActionListener {
     }
 
     fun setupRoom() {
-        val startRoom = Room("The Starting Room", "you wake up in a room theres a note witch says Remember: $password")
+        val startRoom = Room("The Starting Room", "you wake up in a room theres a note witch says Remember: 738843")
         val room2 = Room("Room 2", "in the lock-box theres a key and a note witch says 3 6 5")
-        val room3 = Room("Room 3", "not done")
-        val room4 = Room("Room 4", "not done")
-        val room5 = Room("Room 5", "not done")
+        val room3 = Room("Room 3", "")
+        val room4 = Room("Room 4", "you find same paper with a note saying no capitals and it starts with E")
+        val room5 = Room("Room 5", "theres a TV that says I love caesar ciphers try A - J with    vh kjbvnwc")
         val room6 = Room("Room 6", "not done")
         val room7 = Room("Room 7", "not done")
         val end = Room("exit", "not done")
@@ -162,6 +179,9 @@ class GUI : JFrame(), ActionListener {
         doorImage = doorImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         doorimageIcon = ImageIcon(doorImage)
 
+        var lockboxImage = ImageIcon("images/lockbox.png").image
+        lockboxImage = lockboxImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)
+        lockboxIcon = ImageIcon(lockboxImage)
 
     }
 
@@ -204,7 +224,8 @@ class GUI : JFrame(), ActionListener {
         add(roomNext)
 
 
-        lockBox = JButton("$password lockbox")
+        lockBox = JButton()
+        lockBox.icon = lockboxIcon
         lockBox.bounds = Rectangle(50, 500, 300, 400)
         lockBox.font = baseFont
         lockBox.addActionListener(this)
@@ -339,7 +360,91 @@ class GUI : JFrame(), ActionListener {
 
 
 
+        openWordSearch = JButton("░")
+        openWordSearch.bounds = Rectangle(50, 200, 50, 60)
+        openWordSearch.font = baseFont
+        openWordSearch.addActionListener(this)
+        openWordSearch.isVisible = false
+        add(openWordSearch)
 
+
+
+
+        WordSearch1 = JLabel("W  W  E  G  H  I  P  L  B", SwingConstants.CENTER)
+        WordSearch1.bounds = Rectangle(1000, 420, 240, 30)
+        WordSearch1.font = baseFont
+        WordSearch1.isVisible = false
+        add(WordSearch1)
+
+        WordSearch2 = JLabel("W  W  L  S  N  M  K  L  Q", SwingConstants.CENTER)
+        WordSearch2.bounds = Rectangle(1000, 440, 240, 30)
+        WordSearch2.font = baseFont
+        WordSearch2.isVisible = false
+        add(WordSearch2)
+
+        WordSearch3 = JLabel("I  L  A  S  C B  E  U  I", SwingConstants.CENTER)
+        WordSearch3.bounds = Rectangle(1000, 460, 240, 30)
+        WordSearch3.font = baseFont
+        WordSearch3.isVisible = false
+        add(WordSearch3)
+
+        WordSearch4 = JLabel("Z  J  A  Y  E  A  K  P  E", SwingConstants.CENTER)
+        WordSearch4.bounds = Rectangle(1000, 480, 240, 30)
+        WordSearch4.font = baseFont
+        WordSearch4.isVisible = false
+        add(WordSearch4)
+
+        WordSearch5 = JLabel("A  B  E  L  U  I  P  X  T", SwingConstants.CENTER)
+        WordSearch5.bounds = Rectangle(1000, 500, 240, 30)
+        WordSearch5.font = baseFont
+        WordSearch5.isVisible = false
+        add(WordSearch5)
+
+        WordSearch6 = JLabel("L  Q  E  B  C  V  N  E  M", SwingConstants.CENTER)
+        WordSearch6.bounds = Rectangle(1000, 520, 240, 30)
+        WordSearch6.font = baseFont
+        WordSearch6.isVisible = false
+        add(WordSearch6)
+
+        WordSearch7 = JLabel("O  J  Y  E  P  A  C  S  U", SwingConstants.CENTER)
+        WordSearch7.bounds = Rectangle(1000, 540, 240, 30)
+        WordSearch7.font = baseFont
+        WordSearch7.isVisible = false
+        add(WordSearch7)
+
+        WordSearch8 = JLabel("U  I  N  R  Y  D  J  J  L", SwingConstants.CENTER)
+        WordSearch8.bounds = Rectangle(1000, 560, 240, 30)
+        WordSearch8.font = baseFont
+        WordSearch8.isVisible = false
+        add(WordSearch8)
+
+        WordSearch9 = JLabel("I  U  O  E  P  A  C  S  E", SwingConstants.CENTER)
+        WordSearch9.bounds = Rectangle(1000, 580, 240, 30)
+        WordSearch9.font = baseFont
+        WordSearch9.isVisible = false
+        add(WordSearch9)
+
+
+
+        openCipher = JButton("░")
+        openCipher.bounds = Rectangle(50, 200, 50, 60)
+        openCipher.font = baseFont
+        openCipher.addActionListener(this)
+        openCipher.isVisible = false
+        add(openCipher)
+
+
+        normalTextLabel = JLabel("A B C D E  F G H  I  J K L M N O P Q R S T U V W X Y Z", SwingConstants.LEFT)
+        normalTextLabel.bounds = Rectangle(700, 560, 700, 30)
+        normalTextLabel.font = baseFont
+        normalTextLabel.isVisible = false
+        add(normalTextLabel)
+
+        ciphertextLabel = JLabel("J  K L M N O P Q R S T U V W X Y Z A B  C D E F G H  I", SwingConstants.LEFT)
+        ciphertextLabel.bounds = Rectangle(700, 580, 700, 30)
+        ciphertextLabel.font = baseFont
+        ciphertextLabel.isVisible = false
+        add(ciphertextLabel)
 
 
     }
@@ -350,8 +455,8 @@ class GUI : JFrame(), ActionListener {
             currentRoomLabel.text = "Your in: ${it.name}"
             descriptionLabel.text = " ${it.description}"
 
-
         }
+
         updateButtonStates()
     }
 
@@ -379,6 +484,9 @@ class GUI : JFrame(), ActionListener {
             number9  -> checkCodeWrong()
             number0  -> checkCodeWrong()
 
+            openWordSearch -> showWordSearch()
+            openCipher -> showCipherInput()
+
 
         }
     }
@@ -395,6 +503,7 @@ class GUI : JFrame(), ActionListener {
         if (currentRoom?.previous != null) {
             currentRoom = currentRoom?.previous
             descriptionLabel.isVisible = true
+            hideLastRoom()
             showRoom()
         }
     }
@@ -403,6 +512,7 @@ class GUI : JFrame(), ActionListener {
         if (currentRoom?.next != null) {
             currentRoom = currentRoom?.next
             descriptionLabel.isVisible = false
+            hideLastRoom()
             showRoom()
         }
     }
@@ -415,16 +525,75 @@ class GUI : JFrame(), ActionListener {
 
     private fun confirmPassword() {
 
-        if(passwordTextField.text == password){
-            rooms[1].locked = false
-            descriptionLabel.isVisible = true
-            updateButtonStates()
+        if(currentRoom == rooms[1]) {
+            if (passwordTextField.text == "738843") {
+                rooms[1].locked = false
+                descriptionLabel.isVisible = true
+                updateButtonStates()
 
+            } else {
+                passwordTextField.text = "Incorrect"
+            }
         }
-        else{
-            passwordTextField.text = "incorrect"
+
+        if(currentRoom == rooms[3]) {
+                if (passwordTextField.text == "escape") {
+                    rooms[3].locked = false
+
+                    updateButtonStates()
+                } else {
+                    passwordTextField.text = "incorrect"
+                }
+        }
+
+        if(currentRoom == rooms[4]) {
+                if (passwordTextField.text == "escape") {
+                    descriptionLabel.isVisible = true
+                    rooms[3].locked = false
+                    descriptionLabel.text = " The TV changes to good job the door is open but you should now try a Vigenère cipher with the key being escape on azgn nsy ygt is xzg lpwx jqob csm peth hg qui mr gpe ias xkvt xljge cmrw"
+
+                    updateButtonStates()
+                }
+                else{
+                    passwordTextField.text = "Incorrect"
+                }
         }
     }
+
+
+    private fun hideLastRoom(){
+        keyPad.isVisible = false
+        number1.isVisible = false
+        number2.isVisible = false
+        number3.isVisible = false
+        number4.isVisible = false
+        number5.isVisible = false
+        number6.isVisible = false
+        number7.isVisible = false
+        number8.isVisible = false
+        number9.isVisible = false
+        number0.isVisible = false
+
+        guess1.isVisible =  false
+        guess2.isVisible = false
+        guess3.isVisible = false
+
+        confirm.isVisible = false
+        passwordTextField.isVisible = false
+
+        openWordSearch.isVisible = false
+        WordSearch1.isVisible = false
+        WordSearch2.isVisible = false
+        WordSearch3.isVisible = false
+        WordSearch4.isVisible = false
+        WordSearch5.isVisible = false
+        WordSearch6.isVisible = false
+        WordSearch7.isVisible = false
+        WordSearch8.isVisible = false
+        WordSearch9.isVisible = false
+
+    }
+
 
     private fun showKeys(){
         number1.isVisible = true
@@ -437,6 +606,7 @@ class GUI : JFrame(), ActionListener {
         number8.isVisible = true
         number9.isVisible = true
         number0.isVisible = true
+
 
     }
 
@@ -500,6 +670,40 @@ class GUI : JFrame(), ActionListener {
     }
 
 
+
+    private fun showWordSearch(){
+        WordSearch1.isVisible = true
+        WordSearch2.isVisible = true
+        WordSearch3.isVisible = true
+        WordSearch4.isVisible = true
+        WordSearch5.isVisible = true
+        WordSearch6.isVisible = true
+        WordSearch7.isVisible = true
+        WordSearch8.isVisible = true
+        WordSearch9.isVisible = true
+
+        passwordTextField.isVisible = true
+        confirm.isVisible = true
+
+        updateButtonStates()
+    }
+
+
+    private fun showCipherInput(){
+        passwordTextField.isVisible = true
+        confirm.isVisible = true
+        ciphertextLabel.isVisible = true
+        normalTextLabel.isVisible = true
+    }
+
+
+
+
+
+
+
+
+
     private fun updateButtonStates() {
         roomBack.isEnabled = currentRoom?.previous != null
         roomNext.isEnabled = currentRoom?.next != null && currentRoom?.locked == false
@@ -510,29 +714,21 @@ class GUI : JFrame(), ActionListener {
         }
         else{
             lockBox.isVisible = false
-            confirm.isVisible = false
-            passwordTextField.isVisible = false
+
 
         }
         if (currentRoom == rooms[2]) {
             keyPad.isVisible = true
         }
-        else{
-            keyPad.isVisible = false
-            number1.isVisible = false
-            number2.isVisible = false
-            number3.isVisible = false
-            number4.isVisible = false
-            number5.isVisible = false
-            number6.isVisible = false
-            number7.isVisible = false
-            number8.isVisible = false
-            number9.isVisible = false
-            number0.isVisible = false
-            guess1.isVisible =  false
-            guess2.isVisible = false
-            guess3.isVisible = false
 
+        if(currentRoom == rooms[3]) {
+            openWordSearch.isVisible = true
+            descriptionLabel.isVisible = true
+
+        }
+        if (currentRoom == rooms[4]){
+            descriptionLabel.isVisible = true
+            openCipher.isVisible = true
         }
 
 
