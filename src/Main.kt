@@ -20,6 +20,7 @@ import javax.swing.*
 
 
 
+
 //=============================================================================================
 
 
@@ -56,13 +57,15 @@ class GUI : JFrame(), ActionListener {
     private var clicked6 = false
     private var clicked5 = false
     private var clicks = 0
-    private var ciphers = false
 
 
 
 
 
     // Setup some properties to hold the UI elements
+    private lateinit var backgroundimage: ImageIcon
+    private lateinit var roomBackgound: JLabel
+
 
     private lateinit var passwordTextField: JTextField
     private lateinit var currentRoomLabel: JLabel
@@ -108,13 +111,46 @@ class GUI : JFrame(), ActionListener {
     private lateinit var doorimageIcon: ImageIcon
     private lateinit var lockboxIcon: ImageIcon
 
+    private lateinit var EIcon: ImageIcon
+    private lateinit var EIconBig: ImageIcon
+    private lateinit var EImage: JButton
+    private lateinit var EImageBig: JLabel
+
+
+    private lateinit var gotIcon: ImageIcon
+    private lateinit var gotIconBig: ImageIcon
+    private lateinit var gotImage: JButton
+    private lateinit var gotImageBig: JLabel
+
+    private lateinit var MTIcon: ImageIcon
+    private lateinit var MTIconBig: ImageIcon
+    private lateinit var MTImage: JButton
+    private lateinit var MTImageBig: JLabel
+
+    private lateinit var newtionIcon: ImageIcon
+    private lateinit var newtionIconBig: ImageIcon
+    private lateinit var newtionImage: JButton
+    private lateinit var newtionImageBig: JLabel
+
+    private lateinit var pinkIcon: ImageIcon
+    private lateinit var pinkIconBig: ImageIcon
+    private lateinit var pinkImage: JButton
+    private lateinit var pinkImageBig: JLabel
+
+    private lateinit var paperIcon: ImageIcon
+    private lateinit var paperImage: JButton
+
+    private lateinit var close: JButton
+
+
+
     /**
      * Create, build and run the UI
      */
     init {
         setupRoom()
-        setupWindow()
         loadImages()
+        setupWindow()
         buildUI()
         // Show the app, centred on screen
         setLocationRelativeTo(null)
@@ -122,19 +158,19 @@ class GUI : JFrame(), ActionListener {
 
         currentRoom = rooms.first()
         currentRoom!!.locked = false
-        descriptionLabel.isVisible = true
+
         showRoom()
     }
 
-    fun setupRoom() {
-        val startRoom = Room("The Starting Room", "you wake up in a room theres a note witch says Remember: 738843")
+    private fun setupRoom() {
+        val startRoom = Room("The Starting Room", "Remember: 738843")
         val room2 = Room("Room 2", "in the lock-box theres a key and a note witch says 3 6 5")
         val room3 = Room("Room 3", "")
-        val room4 = Room("Room 4", "you find same paper with a note saying no capitals and it starts with E")
-        val room5 = Room("Room 5", "theres a TV that says I love caesar ciphers try A - J with    vh kjbvnwc")
-        val room6 = Room("Room 6", "not done")
-        val room7 = Room("Room 7", "not done")
-        val end = Room("exit", "not done")
+        val room4 = Room("Room 4", " no capitals and it starts with E")
+        val room5 = Room("Room 5", "I love caesar ciphers try A - J with    vh kjbnvnwc")
+        val room6 = Room("Room 6", "back!!!")
+        val room7 = Room("Room 7", "rooms 3, 4, 7,")
+        val end = Room("exit", "you win!!!!")
 
 
 
@@ -164,10 +200,14 @@ class GUI : JFrame(), ActionListener {
      */
     private fun setupWindow() {
         title = " Escaping Tom's Basement"
-        contentPane.preferredSize = Dimension(1300, 1000)
-        defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+        contentPane.preferredSize = Dimension(1850, 1000)
+        defaultCloseOperation = EXIT_ON_CLOSE
         isResizable = false
         layout = null
+
+
+
+
 
 
         pack()
@@ -175,6 +215,12 @@ class GUI : JFrame(), ActionListener {
 
 
     private fun loadImages() {
+
+        var backgroundImage = ImageIcon("images/room.png").image
+        backgroundImage = backgroundImage.getScaledInstance(1300, 1000, Image.SCALE_SMOOTH)
+        backgroundimage = ImageIcon(backgroundImage)
+
+
         var doorImage = ImageIcon("images/door.png").image
         doorImage = doorImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         doorimageIcon = ImageIcon(doorImage)
@@ -183,20 +229,177 @@ class GUI : JFrame(), ActionListener {
         lockboxImage = lockboxImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         lockboxIcon = ImageIcon(lockboxImage)
 
-    }
+
+
+        var EImage = ImageIcon("images/E.png").image
+        EImage = EImage.getScaledInstance(200, 100, Image.SCALE_SMOOTH)
+        EIcon = ImageIcon(EImage)
+
+        var EImageBig = ImageIcon("images/E.png").image
+        EImageBig = EImageBig.getScaledInstance(900, 600, Image.SCALE_SMOOTH)
+        EIconBig = ImageIcon(EImageBig)
+
+
+
+        var gotImage = ImageIcon("images/got.png").image
+        gotImage = gotImage.getScaledInstance(200, 100, Image.SCALE_SMOOTH)
+        gotIcon = ImageIcon(gotImage)
+
+        var gotImageBig = ImageIcon("images/got.png").image
+        gotImageBig = gotImageBig.getScaledInstance(900, 600, Image.SCALE_SMOOTH)
+        gotIconBig = ImageIcon(gotImageBig)
+
+
+
+        var MTImage = ImageIcon("images/MT.png").image
+        MTImage = MTImage.getScaledInstance(200, 100, Image.SCALE_SMOOTH)
+        MTIcon = ImageIcon(MTImage)
+
+        var MTImageBig = ImageIcon("images/MT.png").image
+        MTImageBig = MTImageBig.getScaledInstance(1850, 1000, Image.SCALE_SMOOTH)
+        MTIconBig = ImageIcon(MTImageBig)
+
+
+
+        var nutionImage = ImageIcon("images/nution.png").image
+        nutionImage = nutionImage.getScaledInstance(200, 100, Image.SCALE_SMOOTH)
+        newtionIcon = ImageIcon(nutionImage)
+
+        var nutionImageBig = ImageIcon("images/nution.png").image
+        nutionImageBig = nutionImageBig.getScaledInstance(900, 600, Image.SCALE_SMOOTH)
+        newtionIconBig = ImageIcon(nutionImageBig)
+
+
+
+        var pinkImage = ImageIcon("images/pink.png").image
+        pinkImage = pinkImage.getScaledInstance(200, 100, Image.SCALE_SMOOTH)
+        pinkIcon = ImageIcon(pinkImage)
+
+        var pinkImageBig = ImageIcon("images/pink.png").image
+        pinkImageBig = pinkImageBig.getScaledInstance(900, 600, Image.SCALE_SMOOTH)
+        pinkIconBig = ImageIcon(pinkImageBig)
+
+
+
+        var paperImage = ImageIcon("images/paper.png").image
+        paperImage = paperImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH)
+        paperIcon = ImageIcon(paperImage)
+
+
+
+   }
 
 
     /**
      * Populate the UI
      */
     private fun buildUI() {
-        val baseFont = Font(Font.SANS_SERIF, Font.PLAIN, 20)
+        val baseFont =  Font(Font.SANS_SERIF, Font.PLAIN, 20)
+
+
+        close = JButton("X")
+        close.bounds = Rectangle(900, 300, 30, 30)
+        close.font = baseFont
+        close.background = background
+        close.isVisible = false
+        close.addActionListener(this)
+        add(close)
+
+
+        pinkImageBig = JLabel()
+        pinkImageBig.icon = pinkIconBig
+        pinkImageBig.bounds = Rectangle(100, 30, 1500, 1100)
+        pinkImageBig.isVisible = false
+        add(pinkImageBig)
+
+        EImageBig = JLabel()
+        EImageBig.icon = EIconBig
+        EImageBig.bounds = Rectangle(100, 30, 1500, 1100)
+        EImageBig.isVisible = false
+        add(EImageBig)
+
+        gotImageBig = JLabel()
+        gotImageBig.icon = gotIconBig
+        gotImageBig.bounds = Rectangle(100, 30, 1500, 1100)
+        gotImageBig.isVisible = false
+        add(gotImageBig)
+
+        MTImageBig = JLabel()
+        MTImageBig.icon = MTIconBig
+        MTImageBig.bounds = Rectangle(0, 0, 2850, 1000)
+        MTImageBig.isVisible = false
+        add(MTImageBig)
+
+        newtionImageBig = JLabel()
+        newtionImageBig.icon = newtionIconBig
+        newtionImageBig.bounds = Rectangle(100, 30, 1500, 1100)
+        newtionImageBig.isVisible = false
+        add(newtionImageBig)
+
+
+
+        pinkImage = JButton()
+        pinkImage.icon = pinkIcon
+        pinkImage.bounds = Rectangle(550, 400, 200, 100)
+        pinkImage.font = baseFont
+        pinkImage.background = background
+        pinkImage.isVisible = false
+        pinkImage.addActionListener(this)
+        add(pinkImage)
+
+        EImage = JButton()
+        EImage.icon = EIcon
+        EImage.bounds = Rectangle(550, 400, 200, 100)
+        EImage.font = baseFont
+        EImage.background = background
+        EImage.isVisible = false
+        EImage.addActionListener(this)
+        add(EImage)
+
+        gotImage = JButton()
+        gotImage.icon = gotIcon
+        gotImage.bounds = Rectangle(550, 400, 200, 100)
+        gotImage.font = baseFont
+        gotImage.background = background
+        gotImage.isVisible = false
+        gotImage.addActionListener(this)
+        add(gotImage)
+
+        MTImage = JButton()
+        MTImage.icon = MTIcon
+        MTImage.bounds = Rectangle(550, 400, 200, 100)
+        MTImage.font = baseFont
+        MTImage.background = background
+        MTImage.isVisible = false
+        MTImage.addActionListener(this)
+        add(MTImage)
+
+        newtionImage = JButton()
+        newtionImage.icon = newtionIcon
+        newtionImage.bounds = Rectangle(550, 400, 200, 100)
+        newtionImage.font = baseFont
+        newtionImage.background = background
+        newtionImage.isVisible = false
+        newtionImage.addActionListener(this)
+        add(newtionImage)
+
+        paperImage = JButton()
+        paperImage.icon = paperIcon
+        paperImage.bounds = Rectangle(800, 400, 50, 50)
+        paperImage.font = baseFont
+        paperImage.background = background
+
+        paperImage.addActionListener(this)
+        add(paperImage)
+
+
+
 
 
 
 
         currentRoomLabel = JLabel("room: start", SwingConstants.CENTER)
-        currentRoomLabel.bounds = Rectangle(100, 80, 400, 30)
+        currentRoomLabel.bounds = Rectangle(1400, 10, 400, 30)
         currentRoomLabel.font = baseFont
         add(currentRoomLabel)
 
@@ -204,44 +407,51 @@ class GUI : JFrame(), ActionListener {
         descriptionLabel = JLabel("room", SwingConstants.CENTER)
         descriptionLabel.bounds = Rectangle(100, 10, 900, 50)
         descriptionLabel.font = baseFont
+
         descriptionLabel.isVisible = false
         add(descriptionLabel)
 
 
         roomBack = JButton()
         roomBack.icon = doorimageIcon
-        roomBack.bounds = Rectangle(520, 60, 120, 190)
+        roomBack.bounds = Rectangle(300, 465, 119, 175)
         roomBack.font = baseFont
+        roomBack.isBorderPainted = false
+        roomBack.background = background
         roomBack.addActionListener(this)
         add(roomBack)
 
 
         roomNext = JButton()
         roomNext.icon = doorimageIcon
-        roomNext.bounds = Rectangle(520, 500, 120, 190)
+        roomNext.bounds = Rectangle(820, 465, 119, 175)
         roomNext.font = baseFont
+        roomNext.isBorderPainted = false
+        roomNext.background = background
         roomNext.addActionListener(this)
         add(roomNext)
 
 
         lockBox = JButton()
         lockBox.icon = lockboxIcon
-        lockBox.bounds = Rectangle(50, 500, 300, 400)
+        lockBox.bounds = Rectangle(50, 500, 170, 175)
         lockBox.font = baseFont
         lockBox.addActionListener(this)
+        lockBox.isBorderPainted = false
+        lockBox.background = background
         lockBox.isVisible = false
         add(lockBox)
 
 
         passwordTextField = JTextField("password", SwingConstants.CENTER)
-        passwordTextField.bounds = Rectangle(900, 800, 240, 40)
+        passwordTextField.bounds = Rectangle(1400, 800, 240, 40)
         passwordTextField.font = baseFont
         passwordTextField.isVisible = false
         add(passwordTextField)
 
 
         confirm = JButton("?")
-        confirm.bounds = Rectangle(1200, 800, 40, 40)
+        confirm.bounds = Rectangle(1700, 800, 40, 40)
         confirm.font = baseFont
         confirm.isVisible = false
         confirm.addActionListener(this)
@@ -252,70 +462,70 @@ class GUI : JFrame(), ActionListener {
 
 
         number1 = JButton("1")
-        number1.bounds = Rectangle(1000 , 400, 40, 40)
+        number1.bounds = Rectangle(1400 , 400, 40, 40)
         number1.font = baseFont
         number1.isVisible = false
         number1.addActionListener(this)
         add(number1)
 
         number2 = JButton("2")
-        number2.bounds = Rectangle(1100, 400, 40, 40)
+        number2.bounds = Rectangle(1500, 400, 40, 40)
         number2.font = baseFont
         number2.isVisible = false
         number2.addActionListener(this)
         add(number2)
 
         number3 = JButton("3")
-        number3.bounds = Rectangle(1200, 400, 40, 40)
+        number3.bounds = Rectangle(1600, 400, 40, 40)
         number3.font = baseFont
         number3.isVisible = false
         number3.addActionListener(this)
         add(number3)
 
         number4 = JButton("4")
-        number4.bounds = Rectangle(1000, 500, 40, 40)
+        number4.bounds = Rectangle(1400, 500, 40, 40)
         number4.font = baseFont
         number4.isVisible = false
         number4.addActionListener(this)
         add(number4)
 
         number5 = JButton("5")
-        number5.bounds = Rectangle(1100, 500, 40, 40)
+        number5.bounds = Rectangle(1500, 500, 40, 40)
         number5.font = baseFont
         number5.isVisible = false
         number5.addActionListener(this)
         add(number5)
 
         number6 = JButton("6")
-        number6.bounds = Rectangle(1200, 500, 40, 40)
+        number6.bounds = Rectangle(1600, 500, 40, 40)
         number6.font = baseFont
         number6.isVisible = false
         number6.addActionListener(this)
         add(number6)
 
         number7 = JButton("7")
-        number7.bounds = Rectangle(1000, 600, 40, 40)
+        number7.bounds = Rectangle(1400, 600, 40, 40)
         number7.font = baseFont
         number7.isVisible = false
         number7.addActionListener(this)
         add(number7)
 
         number8 = JButton("8")
-        number8.bounds = Rectangle(1100, 600, 40, 40)
+        number8.bounds = Rectangle(1500, 600, 40, 40)
         number8.font = baseFont
         number8.isVisible = false
         number8.addActionListener(this)
         add(number8)
 
         number9 = JButton("9")
-        number9.bounds = Rectangle(1200, 600, 40, 40)
+        number9.bounds = Rectangle(1600, 600, 40, 40)
         number9.font = baseFont
         number9.isVisible = false
         number9.addActionListener(this)
         add(number9)
 
         number0 = JButton("0")
-        number0.bounds = Rectangle(1100, 700, 40, 40)
+        number0.bounds = Rectangle(1500, 700, 40, 40)
         number0.font = baseFont
         number0.isVisible = false
         number0.addActionListener(this)
@@ -329,23 +539,25 @@ class GUI : JFrame(), ActionListener {
         keyPad.font = baseFont
         keyPad.addActionListener(this)
         keyPad.isVisible = false
+        keyPad.isBorderPainted = false
+        keyPad.background = background
         add(keyPad)
 
 
         guess1 = JLabel("██", SwingConstants.CENTER)
-        guess1.bounds = Rectangle(1000, 300, 50, 50)
+        guess1.bounds = Rectangle(1400, 300, 50, 50)
         guess1.font = baseFont
         guess1.isVisible = false
         add(guess1)
 
         guess2 = JLabel("██", SwingConstants.CENTER)
-        guess2.bounds = Rectangle(1100, 300, 50, 50)
+        guess2.bounds = Rectangle(1500, 300, 50, 50)
         guess2.font = baseFont
         guess2.isVisible = false
         add(guess2)
 
         guess3 = JLabel("██", SwingConstants.CENTER)
-        guess3.bounds = Rectangle(1200, 300, 50, 50)
+        guess3.bounds = Rectangle(1600, 300, 50, 50)
         guess3.font = baseFont
         guess3.isVisible = false
         add(guess3)
@@ -365,61 +577,63 @@ class GUI : JFrame(), ActionListener {
         openWordSearch.font = baseFont
         openWordSearch.addActionListener(this)
         openWordSearch.isVisible = false
+        openWordSearch.isBorderPainted = false
+        openWordSearch.background = background
         add(openWordSearch)
 
 
 
 
         WordSearch1 = JLabel("W  W  E  G  H  I  P  L  B", SwingConstants.CENTER)
-        WordSearch1.bounds = Rectangle(1000, 420, 240, 30)
+        WordSearch1.bounds = Rectangle(1400, 420, 240, 30)
         WordSearch1.font = baseFont
         WordSearch1.isVisible = false
         add(WordSearch1)
 
         WordSearch2 = JLabel("W  W  L  S  N  M  K  L  Q", SwingConstants.CENTER)
-        WordSearch2.bounds = Rectangle(1000, 440, 240, 30)
+        WordSearch2.bounds = Rectangle(1400, 440, 240, 30)
         WordSearch2.font = baseFont
         WordSearch2.isVisible = false
         add(WordSearch2)
 
         WordSearch3 = JLabel("I  L  A  S  C B  E  U  I", SwingConstants.CENTER)
-        WordSearch3.bounds = Rectangle(1000, 460, 240, 30)
+        WordSearch3.bounds = Rectangle(1400, 460, 240, 30)
         WordSearch3.font = baseFont
         WordSearch3.isVisible = false
         add(WordSearch3)
 
         WordSearch4 = JLabel("Z  J  A  Y  E  A  K  P  E", SwingConstants.CENTER)
-        WordSearch4.bounds = Rectangle(1000, 480, 240, 30)
+        WordSearch4.bounds = Rectangle(1400, 480, 240, 30)
         WordSearch4.font = baseFont
         WordSearch4.isVisible = false
         add(WordSearch4)
 
         WordSearch5 = JLabel("A  B  E  L  U  I  P  X  T", SwingConstants.CENTER)
-        WordSearch5.bounds = Rectangle(1000, 500, 240, 30)
+        WordSearch5.bounds = Rectangle(1400, 500, 240, 30)
         WordSearch5.font = baseFont
         WordSearch5.isVisible = false
         add(WordSearch5)
 
         WordSearch6 = JLabel("L  Q  E  B  C  V  N  E  M", SwingConstants.CENTER)
-        WordSearch6.bounds = Rectangle(1000, 520, 240, 30)
+        WordSearch6.bounds = Rectangle(1400, 520, 240, 30)
         WordSearch6.font = baseFont
         WordSearch6.isVisible = false
         add(WordSearch6)
 
         WordSearch7 = JLabel("O  J  Y  E  P  A  C  S  U", SwingConstants.CENTER)
-        WordSearch7.bounds = Rectangle(1000, 540, 240, 30)
+        WordSearch7.bounds = Rectangle(1400, 540, 240, 30)
         WordSearch7.font = baseFont
         WordSearch7.isVisible = false
         add(WordSearch7)
 
         WordSearch8 = JLabel("U  I  N  R  Y  D  J  J  L", SwingConstants.CENTER)
-        WordSearch8.bounds = Rectangle(1000, 560, 240, 30)
+        WordSearch8.bounds = Rectangle(1400, 560, 240, 30)
         WordSearch8.font = baseFont
         WordSearch8.isVisible = false
         add(WordSearch8)
 
         WordSearch9 = JLabel("I  U  O  E  P  A  C  S  E", SwingConstants.CENTER)
-        WordSearch9.bounds = Rectangle(1000, 580, 240, 30)
+        WordSearch9.bounds = Rectangle(1400, 580, 240, 30)
         WordSearch9.font = baseFont
         WordSearch9.isVisible = false
         add(WordSearch9)
@@ -431,20 +645,34 @@ class GUI : JFrame(), ActionListener {
         openCipher.font = baseFont
         openCipher.addActionListener(this)
         openCipher.isVisible = false
+        openCipher.isBorderPainted = false
+        openCipher.background = background
         add(openCipher)
 
 
         normalTextLabel = JLabel("A B C D E  F G H  I  J K L M N O P Q R S T U V W X Y Z", SwingConstants.LEFT)
-        normalTextLabel.bounds = Rectangle(700, 560, 700, 30)
+        normalTextLabel.bounds = Rectangle(1320, 580, 700, 30)
         normalTextLabel.font = baseFont
         normalTextLabel.isVisible = false
         add(normalTextLabel)
 
         ciphertextLabel = JLabel("J  K L M N O P Q R S T U V W X Y Z A B  C D E F G H  I", SwingConstants.LEFT)
-        ciphertextLabel.bounds = Rectangle(700, 580, 700, 30)
+        ciphertextLabel.bounds = Rectangle(1320, 560, 700, 30)
         ciphertextLabel.font = baseFont
         ciphertextLabel.isVisible = false
         add(ciphertextLabel)
+
+
+
+
+
+        roomBackgound = JLabel()
+        roomBackgound.icon = backgroundimage
+        roomBackgound.bounds = Rectangle(0, 0, 1500, 1100)
+        add(roomBackgound)
+
+
+
 
 
     }
@@ -452,7 +680,7 @@ class GUI : JFrame(), ActionListener {
 
     private fun showRoom() {
         currentRoom?.let {
-            currentRoomLabel.text = "Your in: ${it.name}"
+            currentRoomLabel.text = "You're in: ${it.name}"
             descriptionLabel.text = " ${it.description}"
 
         }
@@ -484,9 +712,27 @@ class GUI : JFrame(), ActionListener {
             number9  -> checkCodeWrong()
             number0  -> checkCodeWrong()
 
+            paperImage ->  descriptionLabel.isVisible = true
+
             openWordSearch -> showWordSearch()
             openCipher -> showCipherInput()
 
+            pinkImage  -> {pinkImageBig.isVisible = true
+                                close.isVisible = true}
+
+            EImage     -> {EImageBig.isVisible = true
+                                close.isVisible = true}
+
+            gotImage   -> {gotImageBig.isVisible = true
+                                close.isVisible = true}
+
+            MTImage    -> {MTImageBig.isVisible = true
+                                close.isVisible = true}
+
+            newtionImage -> {newtionImageBig.isVisible = true
+                                close.isVisible = true}
+
+            close       -> closeImages()
 
         }
     }
@@ -525,10 +771,12 @@ class GUI : JFrame(), ActionListener {
 
     private fun confirmPassword() {
 
+
         if(currentRoom == rooms[1]) {
             if (passwordTextField.text == "738843") {
-                rooms[1].locked = false
+                unlockRoom()
                 descriptionLabel.isVisible = true
+
                 updateButtonStates()
 
             } else {
@@ -538,7 +786,7 @@ class GUI : JFrame(), ActionListener {
 
         if(currentRoom == rooms[3]) {
                 if (passwordTextField.text == "escape") {
-                    rooms[3].locked = false
+                    unlockRoom()
 
                     updateButtonStates()
                 } else {
@@ -547,16 +795,46 @@ class GUI : JFrame(), ActionListener {
         }
 
         if(currentRoom == rooms[4]) {
-                if (passwordTextField.text == "escape") {
+                if (passwordTextField.text == "my basement") {
                     descriptionLabel.isVisible = true
-                    rooms[3].locked = false
-                    descriptionLabel.text = " The TV changes to good job the door is open but you should now try a Vigenère cipher with the key being escape on azgn nsy ygt is xzg lpwx jqob csm peth hg qui mr gpe ias xkvt xljge cmrw"
+                    unlockRoom()
 
                     updateButtonStates()
                 }
                 else{
                     passwordTextField.text = "Incorrect"
                 }
+        }
+        if(currentRoom == rooms[5]) {
+            if (passwordTextField.text == "Isaac Newton") {
+                descriptionLabel.isVisible = true
+                unlockRoom()
+
+                updateButtonStates()
+            }
+            else if (passwordTextField.text == "isaac newton") {
+                descriptionLabel.isVisible = true
+                unlockRoom()
+
+                updateButtonStates()
+            }
+            else if (passwordTextField.text == "newton") {
+                descriptionLabel.isVisible = true
+                unlockRoom()
+
+                updateButtonStates()
+            }
+            else{
+                passwordTextField.text = "Incorrect"
+            }
+        }
+        if (currentRoom == rooms[6]) {
+            if (passwordTextField.text == "jay got E"){
+                unlockRoom()
+            }
+            else{
+                passwordTextField.text = "Incorrect"
+            }
         }
     }
 
@@ -591,6 +869,36 @@ class GUI : JFrame(), ActionListener {
         WordSearch7.isVisible = false
         WordSearch8.isVisible = false
         WordSearch9.isVisible = false
+
+        ciphertextLabel.isVisible = false
+        normalTextLabel.isVisible = false
+
+        openWordSearch.isVisible = false
+        openCipher.isVisible = false
+
+        passwordTextField.text = null
+
+        pinkImage.isVisible = false
+        pinkImageBig.isVisible = false
+        EImage.isVisible = false
+        EImageBig.isVisible = false
+        gotImage.isVisible = false
+        gotImageBig.isVisible = false
+        MTImage.isVisible = false
+        MTImageBig.isVisible = false
+        newtionImage.isVisible = false
+        newtionImageBig.isVisible = false
+        paperImage.isVisible = false
+
+    }
+
+    private fun closeImages(){
+        pinkImageBig.isVisible = false
+        EImageBig.isVisible = false
+        gotImageBig.isVisible = false
+        MTImageBig.isVisible = false
+        newtionImageBig.isVisible = false
+        close.isVisible = false
 
     }
 
@@ -690,10 +998,20 @@ class GUI : JFrame(), ActionListener {
 
 
     private fun showCipherInput(){
+        if (currentRoom == rooms[4]){
         passwordTextField.isVisible = true
         confirm.isVisible = true
         ciphertextLabel.isVisible = true
         normalTextLabel.isVisible = true
+        }
+        if (currentRoom == rooms[5]){
+            passwordTextField.isVisible = true
+            confirm.isVisible = true
+        }
+        if (currentRoom == rooms[6]){
+            passwordTextField.isVisible = true
+            confirm.isVisible = true
+        }
     }
 
 
@@ -708,32 +1026,67 @@ class GUI : JFrame(), ActionListener {
         roomBack.isEnabled = currentRoom?.previous != null
         roomNext.isEnabled = currentRoom?.next != null && currentRoom?.locked == false
 
+        if (currentRoom == rooms[0]) {
+            roomBack.isVisible = false
+        }
+        else{
+            roomBack.isVisible = true
+        }
+
         if (currentRoom == rooms[1]) {
             lockBox.isVisible = true
+            pinkImage.isVisible = true
+            paperImage.isVisible = false
 
         }
         else{
             lockBox.isVisible = false
-
+            pinkImage.isVisible = false
 
         }
         if (currentRoom == rooms[2]) {
             keyPad.isVisible = true
+            gotImage.isVisible = true
         }
 
         if(currentRoom == rooms[3]) {
             openWordSearch.isVisible = true
-            descriptionLabel.isVisible = true
+            paperImage.isVisible = true
 
         }
         if (currentRoom == rooms[4]){
-            descriptionLabel.isVisible = true
+            paperImage.isVisible = true
             openCipher.isVisible = true
+            newtionImage.isVisible = true
         }
 
+        if(currentRoom == rooms[5]) {
+            openCipher.isVisible = true
+            paperImage.isVisible = true
+        }
+        if (currentRoom == rooms[6]) {
+            paperImage.isVisible = true
+            openCipher.isVisible = true
+            EImage.isVisible = true
+        }
+        if (currentRoom == rooms[7]) {
+            endgame()
 
+        }
 
     }
+
+    private fun endgame() {
+
+
+        hideLastRoom()
+        roomBackgound.isVisible = false
+
+
+        MTImageBig.isVisible = true
+    }
+
+
 }
 
 
