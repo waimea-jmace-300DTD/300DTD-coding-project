@@ -1108,6 +1108,11 @@ fun main() {
     // Flat, Dark look-and-feel
     FlatDarkLaf.setup()
 
+    // Customisation - See https://www.formdev.com/flatlaf/components/
+    UIManager.put("Label.foreground", Color(128, 203, 196))
+    UIManager.put("Button.arc", 999)
+    UIManager.put("Button.background", Color(0, 77, 64))
+
     // Create the UI
     GUI()
 }
