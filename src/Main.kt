@@ -106,9 +106,9 @@ class GUI : JFrame(), ActionListener {
 
 
 
-
-
+    private lateinit var roomNextLocked: JLabel
     private lateinit var doorimageIcon: ImageIcon
+    private lateinit var lockedDoorIcon: ImageIcon
     private lateinit var lockboxIcon: ImageIcon
 
     private lateinit var EIcon: ImageIcon
@@ -225,6 +225,11 @@ class GUI : JFrame(), ActionListener {
         doorImage = doorImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         doorimageIcon = ImageIcon(doorImage)
 
+        var lockedDoorImage = ImageIcon("images/lockedDoor.png").image
+        lockedDoorImage = lockedDoorImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)
+        lockedDoorIcon = ImageIcon(lockedDoorImage)
+
+
         var lockboxImage = ImageIcon("images/lockbox.png").image
         lockboxImage = lockboxImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)
         lockboxIcon = ImageIcon(lockboxImage)
@@ -287,6 +292,8 @@ class GUI : JFrame(), ActionListener {
 
 
 
+
+
    }
 
 
@@ -342,7 +349,6 @@ class GUI : JFrame(), ActionListener {
         pinkImage.icon = pinkIcon
         pinkImage.bounds = Rectangle(550, 400, 200, 100)
         pinkImage.font = baseFont
-        pinkImage.background = background
         pinkImage.isVisible = false
         pinkImage.addActionListener(this)
         add(pinkImage)
@@ -351,7 +357,6 @@ class GUI : JFrame(), ActionListener {
         EImage.icon = EIcon
         EImage.bounds = Rectangle(550, 400, 200, 100)
         EImage.font = baseFont
-        EImage.background = background
         EImage.isVisible = false
         EImage.addActionListener(this)
         add(EImage)
@@ -360,7 +365,6 @@ class GUI : JFrame(), ActionListener {
         gotImage.icon = gotIcon
         gotImage.bounds = Rectangle(550, 400, 200, 100)
         gotImage.font = baseFont
-        gotImage.background = background
         gotImage.isVisible = false
         gotImage.addActionListener(this)
         add(gotImage)
@@ -369,7 +373,6 @@ class GUI : JFrame(), ActionListener {
         MTImage.icon = MTIcon
         MTImage.bounds = Rectangle(550, 400, 200, 100)
         MTImage.font = baseFont
-        MTImage.background = background
         MTImage.isVisible = false
         MTImage.addActionListener(this)
         add(MTImage)
@@ -378,7 +381,6 @@ class GUI : JFrame(), ActionListener {
         newtionImage.icon = newtionIcon
         newtionImage.bounds = Rectangle(550, 400, 200, 100)
         newtionImage.font = baseFont
-        newtionImage.background = background
         newtionImage.isVisible = false
         newtionImage.addActionListener(this)
         add(newtionImage)
@@ -387,8 +389,7 @@ class GUI : JFrame(), ActionListener {
         paperImage.icon = paperIcon
         paperImage.bounds = Rectangle(800, 400, 50, 50)
         paperImage.font = baseFont
-        paperImage.background = background
-
+        paperImage.isBorderPainted = false
         paperImage.addActionListener(this)
         add(paperImage)
 
@@ -417,17 +418,22 @@ class GUI : JFrame(), ActionListener {
         roomBack.bounds = Rectangle(300, 465, 119, 175)
         roomBack.font = baseFont
         roomBack.isBorderPainted = false
-        roomBack.background = background
         roomBack.addActionListener(this)
         add(roomBack)
 
+
+
+        roomNextLocked = JLabel()
+        roomNextLocked.icon = lockedDoorIcon
+        roomNextLocked.bounds = Rectangle(820, 460, 200, 180)
+        roomNextLocked.isVisible = false
+        add(roomNextLocked)
 
         roomNext = JButton()
         roomNext.icon = doorimageIcon
         roomNext.bounds = Rectangle(820, 465, 119, 175)
         roomNext.font = baseFont
         roomNext.isBorderPainted = false
-        roomNext.background = background
         roomNext.addActionListener(this)
         add(roomNext)
 
@@ -438,7 +444,6 @@ class GUI : JFrame(), ActionListener {
         lockBox.font = baseFont
         lockBox.addActionListener(this)
         lockBox.isBorderPainted = false
-        lockBox.background = background
         lockBox.isVisible = false
         add(lockBox)
 
@@ -447,6 +452,7 @@ class GUI : JFrame(), ActionListener {
         passwordTextField.bounds = Rectangle(1400, 800, 240, 40)
         passwordTextField.font = baseFont
         passwordTextField.isVisible = false
+        passwordTextField.background = background
         add(passwordTextField)
 
 
@@ -454,6 +460,7 @@ class GUI : JFrame(), ActionListener {
         confirm.bounds = Rectangle(1700, 800, 40, 40)
         confirm.font = baseFont
         confirm.isVisible = false
+        confirm.background = background
         confirm.addActionListener(this)
         add(confirm)
 
@@ -465,6 +472,7 @@ class GUI : JFrame(), ActionListener {
         number1.bounds = Rectangle(1400 , 400, 40, 40)
         number1.font = baseFont
         number1.isVisible = false
+        number1.background = background
         number1.addActionListener(this)
         add(number1)
 
@@ -472,6 +480,7 @@ class GUI : JFrame(), ActionListener {
         number2.bounds = Rectangle(1500, 400, 40, 40)
         number2.font = baseFont
         number2.isVisible = false
+        number2.background = background
         number2.addActionListener(this)
         add(number2)
 
@@ -479,6 +488,7 @@ class GUI : JFrame(), ActionListener {
         number3.bounds = Rectangle(1600, 400, 40, 40)
         number3.font = baseFont
         number3.isVisible = false
+        number3.background = background
         number3.addActionListener(this)
         add(number3)
 
@@ -486,6 +496,7 @@ class GUI : JFrame(), ActionListener {
         number4.bounds = Rectangle(1400, 500, 40, 40)
         number4.font = baseFont
         number4.isVisible = false
+        number4.background = background
         number4.addActionListener(this)
         add(number4)
 
@@ -493,6 +504,7 @@ class GUI : JFrame(), ActionListener {
         number5.bounds = Rectangle(1500, 500, 40, 40)
         number5.font = baseFont
         number5.isVisible = false
+        number5.background = background
         number5.addActionListener(this)
         add(number5)
 
@@ -500,6 +512,7 @@ class GUI : JFrame(), ActionListener {
         number6.bounds = Rectangle(1600, 500, 40, 40)
         number6.font = baseFont
         number6.isVisible = false
+        number6.background = background
         number6.addActionListener(this)
         add(number6)
 
@@ -507,6 +520,7 @@ class GUI : JFrame(), ActionListener {
         number7.bounds = Rectangle(1400, 600, 40, 40)
         number7.font = baseFont
         number7.isVisible = false
+        number7.background = background
         number7.addActionListener(this)
         add(number7)
 
@@ -514,6 +528,7 @@ class GUI : JFrame(), ActionListener {
         number8.bounds = Rectangle(1500, 600, 40, 40)
         number8.font = baseFont
         number8.isVisible = false
+        number8.background = background
         number8.addActionListener(this)
         add(number8)
 
@@ -521,6 +536,7 @@ class GUI : JFrame(), ActionListener {
         number9.bounds = Rectangle(1600, 600, 40, 40)
         number9.font = baseFont
         number9.isVisible = false
+        number9.background = background
         number9.addActionListener(this)
         add(number9)
 
@@ -528,6 +544,7 @@ class GUI : JFrame(), ActionListener {
         number0.bounds = Rectangle(1500, 700, 40, 40)
         number0.font = baseFont
         number0.isVisible = false
+        number0.background = background
         number0.addActionListener(this)
         add(number0)
 
@@ -540,7 +557,6 @@ class GUI : JFrame(), ActionListener {
         keyPad.addActionListener(this)
         keyPad.isVisible = false
         keyPad.isBorderPainted = false
-        keyPad.background = background
         add(keyPad)
 
 
@@ -578,7 +594,6 @@ class GUI : JFrame(), ActionListener {
         openWordSearch.addActionListener(this)
         openWordSearch.isVisible = false
         openWordSearch.isBorderPainted = false
-        openWordSearch.background = background
         add(openWordSearch)
 
 
@@ -646,7 +661,6 @@ class GUI : JFrame(), ActionListener {
         openCipher.addActionListener(this)
         openCipher.isVisible = false
         openCipher.isBorderPainted = false
-        openCipher.background = background
         add(openCipher)
 
 
@@ -1026,6 +1040,14 @@ class GUI : JFrame(), ActionListener {
         roomBack.isEnabled = currentRoom?.previous != null
         roomNext.isEnabled = currentRoom?.next != null && currentRoom?.locked == false
 
+        if(!roomNext.isEnabled){
+
+            roomNextLocked.isVisible = true
+        }
+        else{
+            roomNextLocked.isVisible = false
+        }
+
         if (currentRoom == rooms[0]) {
             roomBack.isVisible = false
         }
@@ -1078,11 +1100,8 @@ class GUI : JFrame(), ActionListener {
 
     private fun endgame() {
 
-
         hideLastRoom()
         roomBackgound.isVisible = false
-
-
         MTImageBig.isVisible = true
     }
 
@@ -1109,9 +1128,9 @@ fun main() {
     FlatDarkLaf.setup()
 
     // Customisation - See https://www.formdev.com/flatlaf/components/
-    UIManager.put("Label.foreground", Color(128, 203, 196))
-    UIManager.put("Button.arc", 999)
-    UIManager.put("Button.background", Color(0, 77, 64))
+//    UIManager.put("Label.foreground", Color(128, 203, 196))
+//    UIManager.put("Button.arc", 90)
+    UIManager.put("Button.background", Color(239, 228,176 ))
 
     // Create the UI
     GUI()
