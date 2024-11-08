@@ -20,7 +20,6 @@ import javax.swing.*
 
 
 
-
 //=============================================================================================
 
 
@@ -57,6 +56,8 @@ class GUI : JFrame(), ActionListener {
     private var clicked6 = false
     private var clicked5 = false
     private var clicks = 0
+
+
 
 
 
@@ -105,7 +106,8 @@ class GUI : JFrame(), ActionListener {
     private lateinit var ciphertextLabel: JLabel
 
 
-
+    private lateinit var pinPadIcon : ImageIcon
+    private lateinit var codePadIcon : ImageIcon
     private lateinit var roomNextLocked: JLabel
     private lateinit var doorimageIcon: ImageIcon
     private lateinit var lockedDoorIcon: ImageIcon
@@ -144,6 +146,7 @@ class GUI : JFrame(), ActionListener {
 
 
 
+
     /**
      * Create, build and run the UI
      */
@@ -169,7 +172,7 @@ class GUI : JFrame(), ActionListener {
         val room4 = Room("Room 4", " no capitals and it starts with E")
         val room5 = Room("Room 5", "I love caesar ciphers try A - J with    vh kjbnvnwc")
         val room6 = Room("Room 6", "back!!!")
-        val room7 = Room("Room 7", "rooms 3, 4, 7,")
+        val room7 = Room("Room 7", "rooms 4, 3, 7,")
         val end = Room("exit", "you win!!!!")
 
 
@@ -291,6 +294,14 @@ class GUI : JFrame(), ActionListener {
         paperIcon = ImageIcon(paperImage)
 
 
+        var codePadImage = ImageIcon("images/codePad.png").image
+        codePadImage = codePadImage.getScaledInstance(40, 50, Image.SCALE_SMOOTH)
+        codePadIcon = ImageIcon(codePadImage)
+
+        var pinPadImage = ImageIcon("images/pinPad.png").image
+        pinPadImage = pinPadImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH)
+        pinPadIcon = ImageIcon(pinPadImage)
+
 
 
 
@@ -305,7 +316,7 @@ class GUI : JFrame(), ActionListener {
 
 
         close = JButton("X")
-        close.bounds = Rectangle(900, 300, 30, 30)
+        close.bounds = Rectangle(1070, 270, 30, 30)
         close.font = baseFont
         close.background = background
         close.isVisible = false
@@ -315,19 +326,19 @@ class GUI : JFrame(), ActionListener {
 
         pinkImageBig = JLabel()
         pinkImageBig.icon = pinkIconBig
-        pinkImageBig.bounds = Rectangle(100, 30, 1500, 1100)
+        pinkImageBig.bounds = Rectangle(200, 20, 1500, 1100)
         pinkImageBig.isVisible = false
         add(pinkImageBig)
 
         EImageBig = JLabel()
         EImageBig.icon = EIconBig
-        EImageBig.bounds = Rectangle(100, 30, 1500, 1100)
+        EImageBig.bounds = Rectangle(200, 20, 1500, 1100)
         EImageBig.isVisible = false
         add(EImageBig)
 
         gotImageBig = JLabel()
         gotImageBig.icon = gotIconBig
-        gotImageBig.bounds = Rectangle(100, 30, 1500, 1100)
+        gotImageBig.bounds = Rectangle(200, 20, 1500, 1100)
         gotImageBig.isVisible = false
         add(gotImageBig)
 
@@ -339,7 +350,7 @@ class GUI : JFrame(), ActionListener {
 
         newtionImageBig = JLabel()
         newtionImageBig.icon = newtionIconBig
-        newtionImageBig.bounds = Rectangle(100, 30, 1500, 1100)
+        newtionImageBig.bounds = Rectangle(200, 20, 1500, 1100)
         newtionImageBig.isVisible = false
         add(newtionImageBig)
 
@@ -387,7 +398,7 @@ class GUI : JFrame(), ActionListener {
 
         paperImage = JButton()
         paperImage.icon = paperIcon
-        paperImage.bounds = Rectangle(800, 400, 50, 50)
+        paperImage.bounds = Rectangle(950, 520, 50, 50)
         paperImage.font = baseFont
         paperImage.isBorderPainted = false
         paperImage.addActionListener(this)
@@ -440,7 +451,7 @@ class GUI : JFrame(), ActionListener {
 
         lockBox = JButton()
         lockBox.icon = lockboxIcon
-        lockBox.bounds = Rectangle(50, 500, 170, 175)
+        lockBox.bounds = Rectangle(160, 670, 160, 175,)
         lockBox.font = baseFont
         lockBox.addActionListener(this)
         lockBox.isBorderPainted = false
@@ -551,8 +562,9 @@ class GUI : JFrame(), ActionListener {
 
 
 
-        keyPad = JButton("░")
-        keyPad.bounds = Rectangle(50, 200, 50, 60)
+        keyPad = JButton()
+        keyPad.icon = pinPadIcon
+        keyPad.bounds = Rectangle(760, 520, 50, 50)
         keyPad.font = baseFont
         keyPad.addActionListener(this)
         keyPad.isVisible = false
@@ -578,18 +590,25 @@ class GUI : JFrame(), ActionListener {
         guess3.isVisible = false
         add(guess3)
 
+
+
+
+
+        // if trying to see if game works without play the game make this one visible
+
         skipNext = JButton("next")
         skipNext.bounds = Rectangle(1100, 50, 80, 50)
         skipNext.font = baseFont
         skipNext.addActionListener(this)
-        skipNext.isVisible = true
+        skipNext.isVisible = false
         add(skipNext)
 
+        //---------------------------------------------------------------------------------
 
 
-
-        openWordSearch = JButton("░")
-        openWordSearch.bounds = Rectangle(50, 200, 50, 60)
+        openWordSearch = JButton()
+        openWordSearch.icon = codePadIcon
+        openWordSearch.bounds = Rectangle(760, 520, 50, 60)
         openWordSearch.font = baseFont
         openWordSearch.addActionListener(this)
         openWordSearch.isVisible = false
@@ -655,8 +674,9 @@ class GUI : JFrame(), ActionListener {
 
 
 
-        openCipher = JButton("░")
-        openCipher.bounds = Rectangle(50, 200, 50, 60)
+        openCipher = JButton()
+        openCipher.icon = codePadIcon
+        openCipher.bounds = Rectangle(760, 520, 50, 60)
         openCipher.font = baseFont
         openCipher.addActionListener(this)
         openCipher.isVisible = false
@@ -690,6 +710,8 @@ class GUI : JFrame(), ActionListener {
 
 
     }
+
+
 
 
     private fun showRoom() {
@@ -844,6 +866,9 @@ class GUI : JFrame(), ActionListener {
         }
         if (currentRoom == rooms[6]) {
             if (passwordTextField.text == "jay got E"){
+                unlockRoom()
+            }
+            else if (passwordTextField.text == "jay got e"){
                 unlockRoom()
             }
             else{
@@ -1011,6 +1036,7 @@ class GUI : JFrame(), ActionListener {
     }
 
 
+
     private fun showCipherInput(){
         if (currentRoom == rooms[4]){
         passwordTextField.isVisible = true
@@ -1129,7 +1155,7 @@ fun main() {
 
     // Customisation - See https://www.formdev.com/flatlaf/components/
 //    UIManager.put("Label.foreground", Color(128, 203, 196))
-//    UIManager.put("Button.arc", 90)
+//    UIManager.put("Button.arc", 30)
     UIManager.put("Button.background", Color(239, 228,176 ))
 
     // Create the UI
